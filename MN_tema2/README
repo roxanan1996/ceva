@@ -1,0 +1,48 @@
+/*
+ * Autor: Nicolescu Roxana-Elena
+ * File : README
+*/
+
+**********************************************************PageRank*************************************************************
+
+
+		\ Citire din fisier /
+			* Functia citire_fis primeste ca parametru numele unui fisier si returneaza N nr de noduri, A matricea de adicenta, K matricea ce contine linkurile, val1 si val2;
+			* Extrag N din prima linie, apoi pentru fiecare din urmatoarele N linii, extrag indicele nodului i si nr de vecini;
+			* Daca am gasit un nod care are link catre el, numarul de vecini il scad cu o unitate;
+			* Cand gasesc legatura dintre nodul i si k pun in A pe poz (i, j) 1;
+			* Din ultimele 2 linii extrag val1 si val2 care sunt string-uri si cu functia strnum le fac cast.
+
+		\ Task 1 /
+			* Task-ul 1 este rezolvat in functia Iterative ce primeste parametrii numele fisierului de input, d, eps;
+			* Folosesc functia citire_fis si extrag N, A, K;
+			* Calculez inversa lui K care are 0-uri, cu exceptia diagonalei principale care are valorile inversate ale diagonalei principale ale lui K;
+			* Aplic formula pentru matricea M;
+			* Initializez vectorul de indici PageRank;
+			* Iterativ, folosind formula propusa, calculez R la pasul t + 1 adica Rp, pana cand am conditia de oprire este adevarata.
+			
+		\ Task 2 /
+			* Task-ul 2 este rezolvat in functia Algebraic care are parametrii numele fisierului si d;
+			* Citesc din fisier folosind citire_fis;
+			* Calculez inversa lui K si M;
+			* Calculez inversa matricei I - d * M folosindu-ma de functia GramSchmidt care inverseaza o matrice A, mai intai facandu-i descompunerea Q R folosind functia Gram_Schmidt, apoi rezolvand cele n sisteme de ecuatii de forma R * coloana i a lui inv(A) = coloana i din Q;
+			* Calculez R.
+
+		\ Task 3/ 
+			* Task-ul 3 este rezolvat in functia Power(nume, d, eps);
+			* Fac citirea din fisier;
+			* Calculze matricea ro = matrice;
+			* Cu metoda puterii, folosindu-ma de functia PutereDir, calculez vectorul R care este vectorul propriu corespunzator valorii proprii dominante din matricea ro.
+
+		\ Task 4 /
+			* Task-ul 4 este rezolvat in functia PageRank;
+			* Fac citirea din fisierul de input;
+			* Deschid fisierul de output nume.out;
+			* Pe prima linie afisez N;
+			* Pe urmatoarele linii afisez vectorii R1 R2 R3 calculati la task-urile 1, 2 si 3;
+			* Sortez descrescator vectorul R2 si vectorul indici care contine nodurile de la 1 la N folosind functia sortare;
+			* Prin functia Apartenenta, calculez pentru fiecare valoare a lui R2 valoarea u(R2);
+			* Afisez pe fiecare linie cate un indice i de la 1 la N in ordine, indicele nodului corespunzator care are valoarea functiei u pe pozitia i dupa sortare si valoarea functiei u in nodul respectiv;
+			* Inchid fisierul de output.
+			
+

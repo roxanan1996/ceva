@@ -1,0 +1,58 @@
+/*
+ * Autor: Nicolescu Roxana-Elena
+ * File : README
+*/
+
+*******************************CATS************************************
+
+
+		\Task 1/
+			* Functia rgbHistogram returneaza un vector de dim 
+3 * count_bins; 
+			* A e formata din matricele R, G, B; 
+			* Pt i = 0 : count_bins - 1, calculez cate elemente 
+din R se gasesc in intervalul (i*256/count_bins;(i+1)*256/count_bins) si le 
+pun in r(i+1);
+			* Analog pentru G si B
+			* Indicele este i+1 pt ca i porneste de la 0 si indicele
+ unui vector de la 1;
+			* vectorul rez reprezinta concatenarea celor 3 vectori R, 
+G si B.
+
+
+		\Task 2/
+			* Pornind de la matricele R, G, B am dedus matricele H, S, V;
+			* Analog ca la task 1 am calculat vectorul rez.
+
+
+		\Task 3/
+			* Functia preprocess extrage din directorul directoarele 
+si fisierele din el cu dirinfo;
+			* Am sters eventualele fisiere si directoarele . si ..;
+			* In files1 si files2 pun toate fisierele din fiecare 
+director;
+			* Am calculat in length1 si length2 cate imagini se gasesc 
+in directoarele cats si not_cats;
+			* Parcurg files1 si files2 si pentru fiecare imagine pun in
+ vectorul t 1, daca se afla in directorul cats si -1 invers, iar in matricea x, pe 
+linia corespunzatoare, pun rezultatul de la rgbHistogram sau hsvHistogram;
+			* Functia preprocess returneaza vectorul t cu nr = numarul 
+de fisiere din ambele directoare - elemente si matricea x cu nr linii si 3*count_bins coloane;
+			* In functia learn am adaugat in matricea x o coloane de 
+"1-uri", facand transpusa lui x, punand o linie de 1-uri la final si facand iar transpusa;
+			* Am calculat vectorul w rezolvand  sistemul 
+(x1'*x1)*w=x1'*t cu metoda iterativa GaussSeidel.
+
+ 
+		\Task 4/
+			* Functia evaluate care primeste ca parametru un path catre
+ directorul testset calculeaza matricea x si vectorul t analog ca la task3 pentru 
+noile directoare, si pentru fiecare imagine din directoare, inmulteste w de la task 3 
+cu linia corespunzatoare imaginii in matricea x; 
+			* Daca numarul este pozitiv si t corespunzator imaginii este
+ 1 sau t este -1 si numarul este negativ, atunci testul este bun si variabila S care 
+numara cate teste sunt bune, creste cu o unitate;
+			* procentul este S/(cate imagini am in total in ambele directoare,
+ adica numarul liniilor matricei x) * 100.
+
+

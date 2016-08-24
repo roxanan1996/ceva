@@ -1,0 +1,67 @@
+/*
+ * Autor: Nicolescu Roxana-Elena
+ * File: README
+*/
+*******************************Identificarea obiectelor in imagini ****************
+
+
+		\ Lerp.m /
+		 * Functia primeste ca parametru un vector v care ai carui indici sunt considerati "x-ii" si valorile "y-ii";
+		 * Daca x se afla in afara intervalului [1, n], unde n este dimensiunea lui v, afisez 0;
+		 * Aflu contorul care este primul indice ce depaseste x, mai pe scurt, capatul din dreapta;
+		 * Daca x are valoarea 1 atunci value = v(1);
+		 * Altfel, aplic interpolarea liniara cu polinomul Lagrange de gradul 1, pentru x1 = contor - 1, x2 = contor, y1 = v(x1), y2 = v(x2);	
+
+		\ Bilerp.m /
+		 * Acelasi lucru ca la lerp, doar ca punctele sunt bidimensionale;
+		 * Pun conditia daca row sau col sunt in afara intervalului;
+		 * Aflu punctele y1 si y2 intre care se afla col;
+		 * Daca col este 1, atunci aplic interpolarea liniara pentru coloana 1 din matrice si x = row;
+		 * Daca nu, aplic de 2 ori lerp pentru coloana y1 si row si coloana y2 si row => R1, R2;
+		 * La final, aplic formula de la interpolarea liniara ca sa aflu valoarea punctului col, intre punctele y1 si y2, cu valorile R1, R2;
+		
+		\ Forward_mapping.m /
+		 * Extrag matricea imaginii si ii aflu dimnesiunea;
+		 * Parcurgand fiecare indice (i,j), aflu noi indici folosint transformarea cu T;
+		 * Aflu minimul dintre noii indici de pe linie si minimul dintre noii indici de pe coloana;
+		 * Reparcurg fiecare indice (i, j), aflu noii indici si apoi translatex axele x si y cu modulul minimului de pe linie + 1, resp. modulul minimului de pe coloana + 1;
+		 * Intr-o noua matrice pun pe noile pozitii, valoarea din matricea initiala in indicii de la care am pornit 
+		 (i, j);
+		 * Afisez noua matrice.
+
+
+		\ Inverse_mapping.m /
+		 * Extrag matricea imaginii si ii aflu dimensiunea;
+		 * Folosint T, aflu indicii linie si coloana din stanga jos si sus, dreapta jos si sus;
+		 * Aflu minimul si maximul dintre indicii de pe linie;
+		 * La fel procedez si pentru coloana;
+		 * Formez noua matrice, parcurg linia de la min la maxim, si coloana de la min la maxim;
+		 * Pentru fiecare indice (i,j), aflu noii indici folosid T transpusa;
+		 * Aflu valoarea aplicand bilerp pe matricea initiala pe noii indici;
+		 * "Translatez"  axele x si y, scazand din indicii initiali (i,j) minimul de pe linie si minimul de pe coloana si adunand 1;
+		 * La noi indici, in noua matricea pun valoarea obtinuta de la bilerp;
+		 * Afisez noua matrice.
+
+		\ Demo. m /
+		 * Pentru fiecare din cele 2 imagini, am apelat functie inverse care imi returneaza o matrice;
+		 * Cu functiile imwrite si mat2gray am "pus" matricea obtinuta precedent in cate un fisier cu nume sugestiv;
+		 * Pentru fiecare imaginea, am 3 cazuri: rotire la 180, la 5, si scalare cu 0.4;
+		 * pentru fiecare caz am folosit cate un T corespunzator;
+
+
+
+		\ Image_stack.m /
+		 * Prima matrice din stack este matricea initiala;
+		 * Recursiv, calculez celelalte matrice care au aceeasi dimensiune cu cea initiala, folosint conv2 pentru  matricea de la pasul anterior si K;
+		 * Returnez stack-ul cu num_levels matrice;
+		
+
+		 \ Transform_Image.m /
+		 * Calculez stiva de matrice pornind de la matricea extrasa din imagine;
+		 * Aflu primul nr intreg care depaseste k;
+		 * Parcurg matricea noua, si aflu valoarea in punctul (i, j), facand interpolare liniara;
+		  * Afisez matricea;
+
+
+		
+		
